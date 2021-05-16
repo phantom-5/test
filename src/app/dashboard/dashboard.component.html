@@ -1,0 +1,70 @@
+
+<div class="jumbotron jumbotron-fluid text-center bg-dark text-white p-5">
+  <div class="container">
+    <h1 class="display-4">{{username}}</h1>
+    <p class="lead">Welcome to your dashboard!</p>
+  </div>
+</div>    
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-5">
+        <form [formGroup]="detailsForm" (ngSubmit)="formSubmit()" class="studDetailForm">
+            <div class="row">
+              <div class="col">
+                <label class="form-control bg-dark text-white">Student Details:</label>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Student Name"
+                formControlName="studentName">
+              </div>
+              <div class="col">
+                <input type="number" class="form-control" placeholder="Score: Subject 1"
+                formControlName="sub1">
+              </div>
+              <div class="col">
+                <input type="number" class="form-control" placeholder="Score: Subject 2"
+                formControlName="sub2">
+              </div>
+              <div class="col">
+                <input type="number" class="form-control" placeholder="Score: Subject 3"
+                formControlName="sub3">
+              </div>
+              <div class="col">
+                <button type="submit" class="btn btn-info">Add</button>
+              </div>
+            </div>
+          </form>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Subject 1</th>
+            <th scope="col">Subject 2</th>
+            <th scope="col">Subject 3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let student of studentDetails; let i = index" (mouseenter)="hoverShow(i)" (mouseleave)="hoverHide(i)">
+            <th scope="row">{{i+1}}</th>
+            <td>{{student.name}}</td>
+            <td [ngClass]="student.sub1<50?'text-danger':''">{{student.sub1}}</td>
+            <td [ngClass]="student.sub2<50?'text-danger':''">{{student.sub2}}</td>
+            <td [ngClass]="student.sub3<50?'text-danger':''">{{student.sub3}}</td>
+            <div ><i *ngIf="student.hover" class="far fa-edit" (click)="editRow(i)" [ngStyle]="{'font-size':'1.5rem', 'cursor':'pointer', 'color':'green'}"></i>&nbsp;<i *ngIf="student.hover" class="far fa-trash-alt" (click)="deleteRow(i)" [ngStyle]="{'font-size':'1.5rem', 'cursor':'pointer', 'color':'black'}"></i></div>
+          </tr>
+        </tbody>
+      </table>
+      <hr/>
+      <div class="row">
+        <div class="col-4"><span class="link-success badge bg-danger text-white" [ngStyle]="{'text-decoration':'none', 'color':'black', 'cursor':'pointer'}" (click)="generateRandom()">Generate Random</span></div>
+        <div class="col-8 d-flex flex-row-reverse"><p>{{currentDate | date: 'fullDate' }}</p></div>
+      </div>
+</div>
