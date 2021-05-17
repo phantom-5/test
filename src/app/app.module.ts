@@ -7,10 +7,11 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {HttpClientModule} from '@angular/common/http'
+import { UserAuthService } from './user-auth.service';
 
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
-  {path: 'dashboard/:username', component: DashboardComponent},
+  {path: 'dashboard/:username', component: DashboardComponent, canActivate:[UserAuthService]},
   {path: '', component: LoginComponent},
   {path: '**', redirectTo: '/'}
 ]

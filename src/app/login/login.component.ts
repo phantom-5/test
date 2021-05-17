@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import bcrypt from 'bcryptjs'
 import Swal from 'sweetalert2'
 import { DbserviceService } from '../dbservice.service';
+import { UserAuthService } from '../user-auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +15,11 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup
 
-  constructor(private router: Router, private route: ActivatedRoute, private dbService:DbserviceService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private dbService:DbserviceService, private userAuthService:UserAuthService) { }
 
   ngOnInit(): void {
     this.initForm()
+    //check loggedin
   }
 
   private initForm(){
@@ -42,6 +44,7 @@ export class LoginComponent implements OnInit {
             noUser = false
             const validPass = await bcrypt.compare(password,user.password)
             if(validPass){
+              this.userAuthService.setIsLoggedIn(true)
               this.router.navigate(['/dashboard',username],{relativeTo: this.route})
             }else{
               Swal.fire({

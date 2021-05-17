@@ -4,6 +4,7 @@ import Swal from 'sweetalert2'
 import bcrypt from 'bcryptjs'
 import { ActivatedRoute, Router } from '@angular/router';
 import { DbserviceService } from '../dbservice.service';
+import { UserAuthService } from '../user-auth.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup
   userExists: boolean
 
-  constructor(private router: Router, private route: ActivatedRoute, private dbService:DbserviceService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private dbService:DbserviceService, private userAuthService:UserAuthService) { }
 
   ngOnInit(): void {
     this.initForm()
@@ -65,6 +66,7 @@ export class RegisterComponent implements OnInit {
           if(!this.userExists){
             this.dbService.postUsers(username,hashedPass).subscribe(responseData => {
               console.log('response of regsitration POST',responseData)
+              this.userAuthService.setIsLoggedIn(true)
               this.router.navigate(['/dashboard',username],{relativeTo: this.route})
             })
             Swal.fire({
