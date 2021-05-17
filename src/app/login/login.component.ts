@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import bcrypt from 'bcryptjs'
 import Swal from 'sweetalert2'
+import Cookies from 'universal-cookie';
 import { DbserviceService } from '../dbservice.service';
 import { UserAuthService } from '../user-auth.service';
 
@@ -45,6 +46,8 @@ export class LoginComponent implements OnInit {
             const validPass = await bcrypt.compare(password,user.password)
             if(validPass){
               this.userAuthService.setIsLoggedIn(true)
+              const cookie = new Cookies()
+              cookie.set('tcsangular-name', username, { path: '/'});
               this.router.navigate(['/dashboard',username],{relativeTo: this.route})
             }else{
               Swal.fire({

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import Swal, { SweetAlertResult } from 'sweetalert2'
 import { DbserviceService } from '../dbservice.service';
 import randomName from 'node-random-name'
+import { UserAuthService } from '../user-auth.service';
+import Cookie from 'universal-cookie'
+import Cookies from 'universal-cookie';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,16 +19,21 @@ export class DashboardComponent implements OnInit {
   studentDetails: {name: string, sub1:number, sub2:number,sub3:number, hover:boolean}[] = []
   detailsForm: FormGroup
 
-  constructor(private route: ActivatedRoute, private dbService: DbserviceService) { }
+  constructor(private route: ActivatedRoute, private dbService: DbserviceService, private router:Router) {}
 
   ngOnInit(): void {
     this.currentDate= new Date()
     console.log(this.currentDate)
+    const cookie = new Cookies()
     this.route.params.subscribe(
       (params: Params) => {
         this.username = params['username']
       }
     )
+    if(cookie.get('tcsangular-name')!==this.username){
+      console.log(cookie.get('tcsangular-name'))
+      this.router.navigate(['/'],{relativeTo:this.route})
+    }
     this.retrieveFromDatabase()
     this.initForm()
   }
