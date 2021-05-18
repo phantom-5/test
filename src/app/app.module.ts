@@ -13,6 +13,7 @@ const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'dashboard/:username', component: DashboardComponent, canActivate:[UserAuthService]},
   {path: '', component: LoginComponent},
+  {path: 'admin',loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
   {path: '**', redirectTo: '/'}
 ]
 @NgModule({
