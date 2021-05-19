@@ -8,12 +8,19 @@ import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {HttpClientModule} from '@angular/common/http'
 import { UserAuthService } from './user-auth.service';
+import { FormsComponent } from './forms/forms.component';
+import { TemplateformComponent } from './templateform/templateform.component';
+import { ReactiveformComponent } from './reactiveform/reactiveform.component';
 
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'dashboard/:username', component: DashboardComponent, canActivate:[UserAuthService]},
   {path: '', component: LoginComponent},
   {path: 'admin',loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
+  {path: 'formsdemo',component:FormsComponent, children:[
+    {path: 'templateform', component:TemplateformComponent},
+    {path: 'reactiveform', component:ReactiveformComponent}
+  ]},
   {path: '**', redirectTo: '/'}
 ]
 @NgModule({
@@ -21,7 +28,10 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent
+    DashboardComponent,
+    FormsComponent,
+    TemplateformComponent,
+    ReactiveformComponent
   ],
   imports: [
     BrowserModule,

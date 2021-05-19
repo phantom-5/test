@@ -1,0 +1,59 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link" [ngClass]="activeVal ? 'active':''" (click)="activeTab()" id="tmpForm" aria-current="page" routerLink="/formsdemo/templateform">Template</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" [ngClass]="activeVal ? '':'active'" (click)="activeTab()" routerLink="/formsdemo/reactiveform">Reactive</a>
+                </li>
+            </ul>
+            <router-outlet></router-outlet>
+        </div>
+        <div class="col-6">
+            <div class="container-fluid mt-5">
+            <h2>Data after Submit: </h2>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Field Name</th>
+                    <th scope="col">Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Email Address</td>
+                    <td [ngClass]="'text-success'">{{emailAddress}}</td>
+                  </tr>
+                  <tr>
+                    <td>Password</td>
+                    <td [ngClass]="'text-success'">{{password}}</td>
+                  </tr>
+                  <tr>
+                    <td>Check This Out</td>
+                    <td [ngClass]="'text-success'">{{checkBox}}</td>
+                  </tr>
+                  <tr>
+                    <td>Example Select</td>
+                    <td [ngClass]="'text-success'">{{selectBox}}</td>
+                  </tr>
+                  <tr>
+                    <td>Example textarea</td>
+                    <td [ngClass]="'text-success'">{{textBox}}</td>
+                  </tr>
+                  <tr>
+                    <td>Example file input</td>
+                    <td [ngClass]="'text-success'">{{fileInput}}</td>
+                  </tr>
+                  <tr>
+                    <td>Radio</td>
+                    <td [ngClass]="'text-success'">{{radioBox}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+    </div>
+</div>
+

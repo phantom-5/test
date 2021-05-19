@@ -64,7 +64,7 @@
       </table>
       <hr/>
       <div class="row">
-        <div class="col-4"><span class="link-success badge bg-danger text-white" [ngStyle]="{'text-decoration':'none', 'color':'black', 'cursor':'pointer'}" (click)="generateRandom()">Generate Random</span></div>
-        <div class="col-8 d-flex flex-row-reverse"><p>{{currentDate | date: 'fullDate' }}</p></div>
+        <div class="col-6"><span class="link-success badge bg-danger text-white" [ngStyle]="{'text-decoration':'none', 'color':'black', 'cursor':'pointer'}" (click)="generateRandom()">Generate Random</span>&nbsp;&nbsp;<small>(Hover on row to get edit or delete options)</small></div>
+        <div class="col-6 d-flex flex-row-reverse"><p>{{currentDate | date: 'fullDate' }}</p></div>
       </div>
 </div>
