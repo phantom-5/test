@@ -19,7 +19,7 @@ export class ReactiveformComponent implements OnInit {
 
   initForm(){
     this.reactiveForm = new FormGroup({
-      'emailAddress': new FormControl(null,Validators.email),
+      'emailAddress': new FormControl(null,[Validators.email, Validators.required]),
       'password': new FormControl(),
       'checkBox': new FormControl(),
       'selectBox': new FormControl(),

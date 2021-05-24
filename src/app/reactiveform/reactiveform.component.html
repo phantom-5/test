@@ -44,5 +44,5 @@
         Option-2
       </label>
     </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!reactiveForm.valid">Submit</button>
 </form>
